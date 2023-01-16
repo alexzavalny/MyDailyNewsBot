@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_16_221856) do
+ActiveRecord::Schema.define(version: 2023_01_16_221857) do
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "chat_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2023_01_16_221856) do
     t.datetime "last_update_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "website_name"
   end
 
 end

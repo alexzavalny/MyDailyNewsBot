@@ -1,1 +1,1 @@
-Telegram bot for subscribing and getting updates from RSS Feeds. Writted in Ruby.
+Telegram bot for subscribing and getting updates from RSS Feeds. Written in Ruby.
