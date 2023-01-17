@@ -1,26 +1,17 @@
 require 'telegram/bot'
 require 'active_record'
 require 'feedjira'
-
-# Connect to the database using Active Record
-ActiveRecord::Base.establish_connection(
-  adapter: 'sqlite3',
-  database: 'subscriptions.sqlite3'
-)
-
-# Define the Subscription model
-class Subscription < ActiveRecord::Base
-end
-
-# Define the maximum number of subscriptions per user
-SUBSCRIPTION_LIMIT = 5
-TOKEN = "5848650600:AAH4WWDuYMqSwbB90WZx_59n9Scqe_wAoqA"
+require 'httparty'
+require './src/config.rb'
+require './src/feed.rb'
+require './models/subscription.rb'
+require './src/db_connection.rb'
 
 class CheckFeedWorker
   include Sidekiq::Worker
 
   def perform
-    Telegram::Bot::Client.run(TOKEN) do |bot|
+    Telegram::Bot::Client.run(Config.get_token) do |bot|
       Subscription.all.each do |sub|
         chat_id = sub.chat_id
         feed_url = sub.feed_url

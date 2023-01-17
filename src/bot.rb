@@ -5,12 +5,8 @@ require 'httparty'
 require './src/config.rb'
 require './src/feed.rb'
 require './models/subscription.rb'
-
-# Connect to the database using Active Record
-ActiveRecord::Base.establish_connection(
-  adapter: 'sqlite3',
-  database: 'db/development.sqlite3'
-)
+require './src/db_connection.rb'
+require './src/texts.rb'
 
 puts "Starting telegram bot"
 
@@ -19,29 +15,29 @@ Telegram::Bot::Client.run(Config.get_token) do |bot|
   bot.listen do |message|
     case message.text
     when '/start'
-      bot.api.send_message(chat_id: message.chat.id, text: "Welcome to My Daily News bot! Use /subscribe to subscribe to a news website.")
+      bot.api.send_message(chat_id: message.chat.id, text: Texts.welcome)
     when '/list_subscriptions'
       # Get the user's subscriptions
       subscriptions = Subscription.where(chat_id: message.chat.id)
 
       unless subscriptions.empty?
         # Show the user's subscriptions
-        reply_message = "Your subscriptions:\n"
+        reply_message = Texts.your_subscription + "\n"
         subscriptions.each do |subscription|
           reply_message += "#{subscription.website_name}\n"
         end
         
         bot.api.send_message(chat_id: message.chat.id, text: reply_message)
       else
-        bot.api.send_message(chat_id: message.chat.id, text: "You have no subscriptions.")
+        bot.api.send_message(chat_id: message.chat.id, text: Texts.no_subscriptions)
       end
     when '/subscribe'
       # Check if the user has reached the subscription limit
       if Subscription.where(chat_id: message.chat.id).count >= Config.get_subscription_limit
-        bot.api.send_message(chat_id: message.chat.id, text: "You have reached your subscription limit.")
+        bot.api.send_message(chat_id: message.chat.id, text: Texts.subscription_limit_reached)
       else
         # Get the RSS feed URL from the user
-        bot.api.send_message(chat_id: message.chat.id, text: "Please enter the RSS feed URL:")
+        bot.api.send_message(chat_id: message.chat.id, text: Texts.enter_rss)
         url = bot.listen do |message|
           break message.text if message.text.start_with?("http")
         end
@@ -59,10 +55,10 @@ Telegram::Bot::Client.run(Config.get_token) do |bot|
       subscriptions = Subscription.where(chat_id: message.chat.id)
 
       if subscriptions.empty?
-        bot.api.send_message(chat_id: message.chat.id, text: "You have no subscriptions.")
+        bot.api.send_message(chat_id: message.chat.id, text: Texts.no_subscriptions)
       else
         # Show the user's subscriptions
-        reply_message = "Please select a subscription to unsubscribe:\n"
+        reply_message = Texts.select_subscription + "\n"
         subscriptions.each_with_index do |subscription, index|
           reply_message += "#{index + 1}. #{subscription.website_name}\n"
         end
