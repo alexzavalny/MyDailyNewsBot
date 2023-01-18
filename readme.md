@@ -4,5 +4,5 @@ Todo:
 
 [ ] Allow enter just website, not RSS -- bot should find an RSS
 [x] Keyboard with allowed commands
-[ ] Bot sends last article once you are subscribed
-[ ] The job
+[x] Bot sends last article once you are subscribed
+[x] The job

@@ -20,8 +20,18 @@ loop do
       chat_id = sub.chat_id
       feed_url = sub.feed_url
       last_update_at = sub.last_update_at
-      feed = Feedjira::Feed.fetch_and_parse(feed_url)
+
       puts "Checking feed #{feed_url}"
+      feed = nil
+      begin
+        xml = HTTParty.get(feed_url).body
+        feed = Feedjira.parse(xml)
+      rescue e
+        p e
+        puts "Error parsing feed #{feed_url}"
+      end
+
+      next if feed.nil?
 
       first = true
       if feed

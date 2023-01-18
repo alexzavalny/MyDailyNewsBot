@@ -13,6 +13,8 @@ puts "Starting telegram bot"
 # Initialize the Telegram bot
 Telegram::Bot::Client.run(Config.get_token) do |bot|
   bot.listen do |message|
+    puts message.text
+
     case message.text
     when '/start'
       bot.api.send_message(chat_id: message.chat.id, text: Texts.welcome)
@@ -23,10 +25,10 @@ Telegram::Bot::Client.run(Config.get_token) do |bot|
       unless subscriptions.empty?
         # Show the user's subscriptions
         reply_message = Texts.your_subscription + "\n"
-        subscriptions.each do |subscription|
-          reply_message += "🗞 #{subscription.website_name} (#{subscription.feed_url}) \n"
+        subscriptions.each_with_index do |subscription, index|
+          reply_message += "🗞 #{index + 1}. #{subscription.website_name} (#{subscription.feed_url}) \n"
         end
-        
+
         bot.api.send_message(chat_id: message.chat.id, text: reply_message)
       else
         bot.api.send_message(chat_id: message.chat.id, text: Texts.no_subscriptions)

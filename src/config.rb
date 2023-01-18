@@ -1,6 +1,6 @@
 module Config
   def self.get_token
-    "5848650600:AAH4WWDuYMqSwbB90WZx_59n9Scqe_wAoqA"
+    "5733938985:AAEm62w2Jj1kBCXCwGM6LBgkOoxv7EFdNHU"
   end
 
   def self.get_subscription_limit
