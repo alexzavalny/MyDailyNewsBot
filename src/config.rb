@@ -4,7 +4,7 @@ module Config
   end
 
   def self.get_subscription_limit
-    10
+    20
   end
 
   def self.get_sleep_time
