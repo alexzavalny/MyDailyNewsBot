@@ -27,8 +27,6 @@ module MessageProcessors
         Subscription.create(
           chat_id: @conversation.chat_id,
           feed_url: url,
-          last_update_at:
-          Time.current,
           website_name: feed_title
         )
 
