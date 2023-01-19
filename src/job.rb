@@ -5,7 +5,7 @@ require "httparty"
 require "./src/config"
 require "./src/feed"
 require "./models/subscription"
-require "./src/db_connection"
+require "./db/db_connection"
 
 # class CheckFeedWorker
 #   include Sidekiq::Worker
