@@ -6,8 +6,6 @@ end
 
 class Array
   def map_with_index
-    self.each_with_index.map do |item, index|
-      yield(item, index)
-    end
+    self.each_with_index.map { |item, index| yield(item, index) }
   end
 end
