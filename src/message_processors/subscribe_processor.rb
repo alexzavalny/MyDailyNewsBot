@@ -1,7 +1,7 @@
 module MessageProcessors
   class SubscribeProcessor < BaseProcessor
     def feed_url
-      @conversation.bot.listen do |message|
+      @conversation.listen do |message|
         break message.text if message.text.start_with?("http")
 
         @conversation.reply(Texts.you_entered_not_a_url)
@@ -10,7 +10,7 @@ module MessageProcessors
 
     def process
       # Check if the user has reached the subscription limit
-      if Subscription.where(chat_id: message.chat.id).count >= Config.subscription_limit
+      if Subscription.where(chat_id: @conversation.chat_id).count >= Config.subscription_limit
         send_text(Texts.subscription_limit_reached)
         return
       end
@@ -25,7 +25,7 @@ module MessageProcessors
 
         # Create a new subscription in the database
         Subscription.create(
-          chat_id: message.chat.id,
+          chat_id: @conversation.chat_id,
           feed_url: url,
           last_update_at:
           Time.current,

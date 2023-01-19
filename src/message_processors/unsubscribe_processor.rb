@@ -2,7 +2,7 @@ module MessageProcessors
   class UnsubscribeProcessor < BaseProcessor
     def read_subscription_number
       # Get the selected subscription
-      @conversation.bot.listen do |message|
+      @conversation.listen do |message|
         if !message.text.integer?
           send_text(Texts.you_entered_not_a_number)
         elsif message.text.to_i - 1 >= subscriptions.length

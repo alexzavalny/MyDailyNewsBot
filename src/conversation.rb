@@ -1,4 +1,10 @@
+require 'forwardable'
+
 class Conversation
+  extend Forwardable
+
+  def_delegators :@bot, :listen
+
   def initialize(bot:, message:)
     @bot = bot
     @message = message
@@ -15,6 +21,7 @@ class Conversation
   def chat_id
     @message.chat.id
   end
+
 
   # def prompt
   #   @bot.listen do |message|
