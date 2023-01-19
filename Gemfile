@@ -8,6 +8,7 @@ gem "sidekiq"
 gem "sqlite3"
 gem "standalone_migrations"
 gem "telegram-bot-ruby"
+gem "byebug"
 
 group :test do
   gem "rspec-rails"
