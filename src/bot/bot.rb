@@ -34,6 +34,5 @@ class Bot
   end
 end
 
-
 # ASK_KIM - How to make logging better?
 # ASK_KIM - how to remove the dependency on the telegram bot? How to test this all?

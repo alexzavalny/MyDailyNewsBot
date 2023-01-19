@@ -34,7 +34,7 @@ module MessageProcessors
         @conversation.reply(article_url)
       rescue Feedjira::NoParserAvailable
         @conversation.reply(Texts.invalid_rss)
-      rescue StandardError
+      rescue
         @conversation.reply(Texts.invalid_rss)
       end
     end

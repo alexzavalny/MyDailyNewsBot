@@ -24,7 +24,7 @@ class ProcessorManager
   class << self
     def process(bot, message)
       conversation = Conversation.new(bot: bot, message: message)
-      self.processor_for_conversation(conversation).process
+      processor_for_conversation(conversation).process
     end
 
     def processor_for_conversation(conversation)

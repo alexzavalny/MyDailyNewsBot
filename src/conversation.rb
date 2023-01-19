@@ -1,4 +1,4 @@
-require 'forwardable'
+require "forwardable"
 
 class Conversation
   extend Forwardable
@@ -21,7 +21,6 @@ class Conversation
   def chat_id
     @message.chat.id
   end
-
 
   # def prompt
   #   @bot.listen do |message|

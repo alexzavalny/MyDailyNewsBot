@@ -1,5 +1,5 @@
 class BotLogger
-  def initialize(logger = Logger.new(STDOUT))
+  def initialize(logger = Logger.new($stdout))
     @logger = logger
   end
 

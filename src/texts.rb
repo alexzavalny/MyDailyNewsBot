@@ -26,7 +26,7 @@ module Texts
     end
 
     def invalid_rss
-      "Invalid RSS feed URL. (I still cannot find RSS feed myself. Please send a link to the feed, not to the website."
+      "Invalid RSS feed URL.\nI still cannot find RSS feed myself. Please send a link to the feed, not to the website."
     end
 
     def unknown_command

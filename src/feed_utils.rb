@@ -13,7 +13,7 @@ class FeedUtils
       response = HTTParty.get(url)
       doc = Nokogiri::HTML(response.body)
       doc.css("link[type='application/rss+xml']").first["href"]
-    rescue StandardError
+    rescue
       nil
     end
   end
