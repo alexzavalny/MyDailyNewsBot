@@ -3,7 +3,7 @@ require "active_record"
 require "feedjira"
 require "httparty"
 require "./src/config"
-require "./src/feed"
+require "./src/feed_utils"
 require "./models/subscription"
 require "./db/db_connection"
 

@@ -1,3 +1,4 @@
+# rubocop:disable Layout/LineLength
 module Texts
   class << self
     def welcome
@@ -39,5 +40,15 @@ module Texts
     def catalog_is_empty
       "Catalog is empty, but we are working on it. Stay tuned"
     end
+
+    def you_entered_not_a_number
+      "You need to enter a number of subscription you want to unsubscribe. Please try again."
+    end
+
+    def invalid_number
+      "Invalid number. Please try again."
+    end
   end
 end
+
+# rubocop:enable Layout/LineLength

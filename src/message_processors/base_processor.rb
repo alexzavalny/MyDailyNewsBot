@@ -9,6 +9,10 @@ module MessageProcessors
     end
 
     def process
+      send_text(compose_reply)
+    end
+
+    def compose_reply
       raise NotImplementedError
     end
 

@@ -1,7 +1,7 @@
 module MessageProcessors
   class StartProcessor < BaseProcessor
-    def process
-      send_text(Texts.welcome)
+    def compose_reply
+      Texts.welcome
     end
   end
 end

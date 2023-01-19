@@ -1,7 +1,7 @@
 module MessageProcessors
   class HelpProcessor < BaseProcessor
-    def process
-      send_text(Texts.available_commands)
+    def compose_reply
+      Texts.available_commands
     end
   end
 end

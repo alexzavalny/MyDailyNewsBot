@@ -87,7 +87,8 @@ Metrics/ModuleLength:
   Max: 100
 
 Layout/LineLength:
-  Enabled: false
+  Enabled: true
+  Max: 100
 
 Metrics/MethodLength:
   Max: 15
