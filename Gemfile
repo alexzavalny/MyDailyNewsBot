@@ -1,14 +1,14 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem "telegram-bot-ruby"
-gem "sidekiq"
 gem "activerecord", "~> 6.1.7"
-gem "sqlite3"
 gem "feedjira"
-gem "standalone_migrations"
 gem "httparty"
 gem "rubocop"
 gem "rubocop-rails"
+gem "sidekiq"
+gem "sqlite3"
+gem "standalone_migrations"
+gem "telegram-bot-ruby"
 
 group :test do
   gem "rspec-rails"

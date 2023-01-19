@@ -1,11 +1,11 @@
-require 'telegram/bot'
-require 'active_record'
-require 'feedjira'
-require 'httparty'
-require './src/config.rb'
-require './src/feed.rb'
-require './models/subscription.rb'
-require './src/db_connection.rb'
+require "telegram/bot"
+require "active_record"
+require "feedjira"
+require "httparty"
+require "./src/config"
+require "./src/feed"
+require "./models/subscription"
+require "./src/db_connection"
 
 # class CheckFeedWorker
 #   include Sidekiq::Worker
@@ -15,7 +15,7 @@ require './src/db_connection.rb'
 puts "Job started..."
 
 loop do
-  Telegram::Bot::Client.run(Config.get_token) do |bot|
+  Telegram::Bot::Client.run(Config.token) do |bot|
     Subscription.all.each do |sub|
       chat_id = sub.chat_id
       feed_url = sub.feed_url
@@ -34,19 +34,17 @@ loop do
       next if feed.nil?
 
       first = true
-      if feed
-        feed.entries.each do |entry|
-          if entry.published > last_update_at
-            bot.api.send_message(chat_id: chat_id, text: entry.url)
-            sub.update(last_update_at: entry.published) if first
-            first = false
-          end
-        end
+      next unless feed
+
+      feed.entries.each do |entry|
+        next unless entry.published > last_update_at
+
+        bot.api.send_message(chat_id: chat_id, text: entry.url)
+        sub.update(last_update_at: entry.published) if first
+        first = false
       end
     end
   end
 
-  sleep Config.get_sleep_time
+  sleep Config.sleep_time
 end
-#   end
-# end

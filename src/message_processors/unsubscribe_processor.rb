@@ -8,7 +8,7 @@ module MessageProcessors
         send_text(Texts.no_subscriptions)
       else
         # Show the user's subscriptions
-        reply_message = Texts.select_subscription + "\n"
+        reply_message = "#{Texts.select_subscription}\n"
         subscriptions.each_with_index do |subscription, index|
           reply_message += "#{index + 1}. #{subscription.website_name}\n"
         end
