@@ -1,5 +1,3 @@
-#freeze_string_literal: true
-
 module MessageProcessors
   #ASK_KIM - seems like this base class also is like a wrapper for bot (telegram api)...
   class BaseProcessor

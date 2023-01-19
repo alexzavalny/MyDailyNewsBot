@@ -7,6 +7,8 @@ gem "sqlite3"
 gem "feedjira"
 gem "standalone_migrations"
 gem "httparty"
+gem "rubocop"
+gem "rubocop-rails"
 
 group :test do
   gem "rspec-rails"

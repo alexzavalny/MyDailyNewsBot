@@ -1,5 +1,3 @@
-#freeze_string_literal: true
-
 module MessageProcessors
   class UnsubscribeProcessor < BaseProcessor
     def process
