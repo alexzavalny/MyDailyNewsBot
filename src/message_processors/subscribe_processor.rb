@@ -1,10 +1,10 @@
 module MessageProcessors
   class SubscribeProcessor < BaseProcessor
     def feed_url
-      bot.listen do |message|
+      @conversation.bot.listen do |message|
         break message.text if message.text.start_with?("http")
 
-        send_text(Texts.you_entered_not_a_url)
+        @conversation.reply(Texts.you_entered_not_a_url)
       end
     end
 
@@ -16,7 +16,7 @@ module MessageProcessors
       end
 
       # Get the RSS feed URL from the user
-      send_text(Texts.enter_rss)
+      @conversation.reply(Texts.enter_rss)
       url = feed_url
 
       # Parse the RSS feed
@@ -32,10 +32,12 @@ module MessageProcessors
           website_name: feed_title
         )
 
-        send_text("You are now subscribed to #{feed_title} news. Last article:\n")
-        send_text(article_url)
+        @conversation.reply("You are now subscribed to #{feed_title} news. Last article:\n")
+        @conversation.reply(article_url)
+      rescue Feedjira::NoParserAvailable
+        @conversation.reply(Texts.invalid_rss)
       rescue StandardError
-        send_text(Texts.invalid_rss)
+        @conversation.reply(Texts.invalid_rss)
       end
     end
   end

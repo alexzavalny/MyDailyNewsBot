@@ -1,7 +1,7 @@
 module MessageProcessors
   class StartProcessor < BaseProcessor
-    def compose_reply
-      Texts.welcome
+    def process
+      @conversation.reply(Texts.welcome)
     end
   end
 end
