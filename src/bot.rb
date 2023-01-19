@@ -2,10 +2,11 @@ require 'telegram/bot'
 require 'active_record'
 require 'feedjira'
 require 'httparty'
+
 require './src/config.rb'
 require './src/feed.rb'
 require './models/subscription.rb'
-require './src/db_connection.rb'
+require './db/db_connection.rb'
 require './src/texts.rb'
 require './src/processor_manager.rb'
 
