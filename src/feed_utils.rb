@@ -20,16 +20,17 @@ class FeedUtils
       return combine_url(url, atom_xml) if atom_xml
 
       nil
-    rescue StandardError => e
+    rescue => e
       p e
       nil
     end
 
     private
+
     def get_link(doc, path)
       links = doc.css(path)
       if links.first && links.first["href"]
-        return links.first["href"]
+        links.first["href"]
       end
     end
 
