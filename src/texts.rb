@@ -48,6 +48,10 @@ module Texts
     def invalid_number
       "Invalid number. Please try again."
     end
+
+    def you_entered_not_a_url
+      "You need to enter a valid URL. Please try again."
+    end
   end
 end
 

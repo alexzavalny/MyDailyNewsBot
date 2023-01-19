@@ -3,6 +3,8 @@ module MessageProcessors
     def feed_url
       bot.listen do |message|
         break message.text if message.text.start_with?("http")
+
+        send_text(Texts.you_entered_not_a_url)
       end
     end
 

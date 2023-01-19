@@ -3,3 +3,11 @@ class String
     self.to_i.to_s == self
   end
 end
+
+class Array
+  def map_with_index
+    self.each_with_index.map do |item, index|
+      yield(item, index)
+    end
+  end
+end

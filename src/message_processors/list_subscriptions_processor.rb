@@ -2,21 +2,18 @@ require "./src/message_processors/base_processor"
 
 module MessageProcessors
   class ListSubscriptionsProcessor < BaseProcessor
-    def compose_reply
-      subscriptions = Subscription.where(chat_id: message.chat.id)
+    def subscriptions
+      @subscriptions ||= Subscription.where(chat_id: message.chat.id)
+    end
 
+    def compose_reply
       return Texts.no_subscriptions if subscriptions.empty?
 
       # Show the user's subscriptions
-      reply_message = "#{Texts.your_subscription}\n"
-      subscriptions.each_with_index do |subscription, index|
-        reply_message += "🗞 #{index + 1}. #{subscription.website_name} (#{subscription.feed_url}) \n"
-      end
-      reply_message
-    end
-
-    def process
-      send_text(compose_reply)
+      "#{Texts.your_subscription}\n\n" +
+        subscriptions.map_with_index do |subscription, index|
+          "🗞 #{index + 1}. #{subscription.name_with_url}\n"
+        end
     end
   end
 end
