@@ -3,7 +3,7 @@ module MessageProcessors
     def feed_url
       @conversation.listen do |message|
         p message.text
-        break message.text if message.text.start_with?("http")
+        break message.text if !message.nil? && message.text.start_with?("http")
 
         @conversation.reply(Texts.you_entered_not_a_url)
       end

@@ -4,9 +4,9 @@ module MessageProcessors
       # Get the selected subscription
       @conversation.listen do |message|
         if !message.text.integer?
-          send_text(Texts.you_entered_not_a_number)
+          @conversation.reply(Texts.you_entered_not_a_number)
         elsif message.text.to_i - 1 >= subscriptions.length
-          send_text(Texts.invalid_number)
+          @conversation.reply(Texts.invalid_number)
         else
           break message.text.to_i - 1
         end

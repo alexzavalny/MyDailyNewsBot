@@ -27,8 +27,7 @@ class SubscriptionJob
           begin
             xml = HTTParty.get(feed_url).body
             feed = Feedjira.parse(xml)
-          rescue e
-            p e
+          rescue
             puts "Error parsing feed #{feed_url}"
           end
 
@@ -54,6 +53,6 @@ class SubscriptionJob
   private
 
   def format_message(subscription, entry)
-    "#{subscription.website_name} - #{entry.title}\n\n#{entry.url}"
+    "#{subscription.website_name}\n#{entry.title}\n\n#{entry.url}"
   end
 end
