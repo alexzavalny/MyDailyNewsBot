@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'zeitwerk'
+require "zeitwerk"
 loader = Zeitwerk::Loader.new
 
 loader.push_dir("#{__dir__}/models")
 loader.push_dir("#{__dir__}/src")
-#loader.logger = method(:puts)
+# loader.logger = method(:puts)
 loader.setup
 
 Jobs::SubscriptionJob.new.start

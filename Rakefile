@@ -1,4 +1,4 @@
-require "standalone_migrations"
+# require "standalone_migrations"
 require "standard/rake"
 
-StandaloneMigrations::Tasks.load_tasks
+# StandaloneMigrations::Tasks.load_tasks

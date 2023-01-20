@@ -49,35 +49,34 @@ module MessageProcessors
 
     def process_url(url)
       # Parse the RSS feed
-      begin
-        return if check_already_subscribed?(url)
 
-        puts "Parsing feed #{url}"
+      return if check_already_subscribed?(url)
 
-        feed_title, article_url = FeedUtils.get_feed_title_from_url(url)
+      puts "Parsing feed #{url}"
 
-        # Create a new subscription in the database
-        Subscription.create(
-          chat_id: @conversation.chat_id,
-          feed_url: url,
-          website_name: feed_title,
-          last_update_at: Time.now
-        )
+      feed_title, article_url = FeedUtils.get_feed_title_from_url(url)
 
-        @conversation.reply(Texts.successfully_subscribed(feed_title))
-        @conversation.reply(article_url)
-      rescue Feedjira::NoParserAvailable
-        rss_link = FeedUtils.find_feed_url_on_page(url)
+      # Create a new subscription in the database
+      Subscription.create(
+        chat_id: @conversation.chat_id,
+        feed_url: url,
+        website_name: feed_title,
+        last_update_at: Time.now
+      )
 
-        return if check_no_feed?(rss_link)
+      @conversation.reply(Texts.successfully_subscribed(feed_title))
+      @conversation.reply(article_url)
+    rescue Feedjira::NoParserAvailable
+      rss_link = FeedUtils.find_feed_url_on_page(url)
 
-        @conversation.reply(Texts.found_link(rss_link))
-        url = rss_link
-        retry
-      # rescue StandardError => e
-      #   puts e
-      #   @conversation.reply(Texts.invalid_rss)
-      end
+      return if check_no_feed?(rss_link)
+
+      @conversation.reply(Texts.found_link(rss_link))
+      url = rss_link
+      retry
+    rescue StandardError => e
+      puts e
+      @conversation.reply(Texts.invalid_rss)
     end
   end
 end

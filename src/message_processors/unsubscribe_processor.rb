@@ -54,9 +54,9 @@ module MessageProcessors
     def compose_keyboard
       keyboard = []
       subscriptions.each_with_index do |subscription, index|
-        keyboard << [{ text: "#{index + 1}. #{subscription.website_name}", callback_data: "/unsubscribe #{index + 1}" }]
+        keyboard << [{text: "#{index + 1}. #{subscription.website_name}", callback_data: "/unsubscribe #{index + 1}"}]
       end
-      keyboard << [{ text: "Cancel", callback_data: "0" }]
+      keyboard << [{text: "Cancel", callback_data: "0"}]
       keyboard
     end
 

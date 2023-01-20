@@ -6,7 +6,7 @@ module Extensions
 
     def is_url?
       uri = URI.parse(self)
-      %w( http https ).include?(uri.scheme)
+      %w[http https].include?(uri.scheme)
     rescue URI::BadURIError
       false
     rescue URI::InvalidURIError
