@@ -4,7 +4,7 @@ require "feedjira"
 require "httparty"
 
 module Bots
-  class Bot
+  class RssBot
     def initialize(
       client_klass: Telegram::Bot::Client,
       message_processor: ProcessorManager,

@@ -5,8 +5,8 @@ loader = Zeitwerk::Loader.new
 
 loader.push_dir("#{__dir__}/models")
 loader.push_dir("#{__dir__}/src")
-loader.logger = method(:puts)
+#loader.logger = method(:puts)
 loader.setup
+loader.eager_load_dir("#{__dir__}/src/extensions")
 
-Extensions::ArrayExtension; Extensions::StringExtension;
-Bots::Bot.new.start
+Bots::RssBot.new.start

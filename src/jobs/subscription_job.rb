@@ -50,7 +50,7 @@ module Jobs
     private
 
     def format_message(subscription, entry)
-      "#{subscription.website_name}\n#{entry.title}\n\n#{entry.url}"
+      "#{subscription.website_name}\n\n#{entry.title}\n\n#{entry.url}"
     end
   end
 end

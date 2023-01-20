@@ -14,6 +14,14 @@ class Conversation
     @bot.api.send_message(chat_id: @message.chat.id, text: text)
   end
 
+  def reply_with_keyboard(keyboard)
+    @bot.api.send_message(
+      chat_id: @message.chat.id,
+      text: "Select one of the options below:",
+      reply_markup: Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: keyboard, one_time_keyboard: true)
+    )
+  end
+
   def command
     @message.text
   end

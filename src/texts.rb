@@ -18,7 +18,7 @@ module Texts
     end
 
     def select_subscription
-      "Please select a subscription to unsubscribe:"
+      "Please enter number of subscription to unsubscribe. (Enter zero to cancel)"
     end
 
     def your_subscription
@@ -51,6 +51,26 @@ module Texts
 
     def you_entered_not_a_url
       "You need to enter a valid URL. Please try again.\nYou CAN enter just a link to the website, not to the RSS feed. I will try to find it myself.\nJust start with http:// or https://, ok? ❤️"
+    end
+
+    def already_subscribed
+      "You are already subscribed to this feed"
+    end
+
+    def found_link(rss_link)
+      "I found a link to RSS feed: #{rss_link}"
+    end
+
+    def cannot_find_link
+      "I cannot find a link to RSS feed on this page. Please try again."
+    end
+
+    def successfully_subscribed(feed_title)
+      "You have successfully subscribed to #{feed_title} news."
+    end
+
+    def canceled
+      "Canceled."
     end
   end
 end

@@ -16,11 +16,12 @@ class ProcessorManager
   class << self
     def process(bot, message)
       conversation = Conversation.new(bot: bot, message: message)
-      processor_for_conversation(conversation).process
+      processor_for_conversation(conversation).new(conversation).process
     end
 
     def processor_for_conversation(conversation)
-      (PROCESSORS_MAPPING[conversation.command] || DEFAULT).new(conversation)
+      return MessageProcessors::SubscribeProcessor if conversation.command.is_url?
+      (PROCESSORS_MAPPING[conversation.command] || DEFAULT)
     end
   end
 end

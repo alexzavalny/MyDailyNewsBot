@@ -43,7 +43,12 @@ class FeedUtils
       p url
       return url unless relative_url?(url)
 
-      base_url + url
+      get_base_url(base_url) + url
+    end
+
+    def get_base_url(url)
+      uri = URI(url)
+      "#{uri.scheme}://#{uri.host}"
     end
   end
 end
