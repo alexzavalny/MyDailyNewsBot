@@ -9,6 +9,7 @@ gem "sqlite3"
 gem "standalone_migrations"
 gem "telegram-bot-ruby"
 gem "byebug"
+gem 'zeitwerk', '~> 2.4.0'
 
 group :test do
   gem "rspec-rails"

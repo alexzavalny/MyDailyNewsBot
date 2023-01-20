@@ -1,5 +1,12 @@
 #!/usr/bin/env ruby
 
-require "./src/bot/bot"
+require 'zeitwerk'
+loader = Zeitwerk::Loader.new
 
-Bot.new.start
+loader.push_dir("#{__dir__}/models")
+loader.push_dir("#{__dir__}/src")
+loader.logger = method(:puts)
+loader.setup
+
+Extensions::ArrayExtension; Extensions::StringExtension;
+Bots::Bot.new.start

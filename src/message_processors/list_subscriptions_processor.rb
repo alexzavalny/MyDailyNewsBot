@@ -1,5 +1,3 @@
-require "./src/message_processors/base_processor"
-
 module MessageProcessors
   class ListSubscriptionsProcessor < BaseProcessor
     def subscriptions

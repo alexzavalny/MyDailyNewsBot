@@ -52,10 +52,6 @@ module Texts
     def you_entered_not_a_url
       "You need to enter a valid URL. Please try again.\nYou CAN enter just a link to the website, not to the RSS feed. I will try to find it myself.\nJust start with http:// or https://, ok? ❤️"
     end
-
-    def seems_like_not_rss
-      "Seems like this is not a RSS feed. Searching for a link to rss..."
-    end
   end
 end
 

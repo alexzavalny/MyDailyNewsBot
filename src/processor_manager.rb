@@ -1,11 +1,3 @@
-require "./src/conversation"
-
-Dir["./src/message_processors/*.rb"].sort.each do |file|
-  puts "Loading #{file}"
-  require file
-end
-# TODO: zeitwerk
-
 # This class is responsible for mapping commands to processors
 # and executing the right processor for the command
 # ASK_KIM - Should this file be here? How should it be called?

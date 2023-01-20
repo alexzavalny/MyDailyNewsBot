@@ -41,7 +41,6 @@ module MessageProcessors
         @conversation.reply("You are now subscribed to #{feed_title} news. Last article:\n")
         @conversation.reply(article_url)
       rescue Feedjira::NoParserAvailable
-        @conversation.reply(Texts.seems_like_not_rss)
         rss_link = FeedUtils.find_feed_url_on_page(url)
 
         if rss_link

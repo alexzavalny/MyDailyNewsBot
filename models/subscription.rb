@@ -1,5 +1,7 @@
 require "active_record"
 
+DbConnection.connect
+
 class Subscription < ActiveRecord::Base
   default_scope { order(created_at: :asc) }
 
