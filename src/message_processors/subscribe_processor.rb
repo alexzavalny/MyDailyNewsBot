@@ -42,9 +42,7 @@ module MessageProcessors
         @conversation.reply(article_url)
       rescue Feedjira::NoParserAvailable
         @conversation.reply(Texts.seems_like_not_rss)
-        puts "before"
         rss_link = FeedUtils.find_feed_url_on_page(url)
-        puts "after"
 
         if rss_link
           @conversation.reply("I found a link to RSS feed: #{rss_link}")
