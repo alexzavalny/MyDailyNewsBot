@@ -74,7 +74,7 @@ module MessageProcessors
       @conversation.reply(Texts.found_link(rss_link))
       url = rss_link
       retry
-    rescue StandardError => e
+    rescue => e
       puts e
       @conversation.reply(Texts.invalid_rss)
     end

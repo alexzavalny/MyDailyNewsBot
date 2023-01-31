@@ -1,7 +1,7 @@
 module MessageProcessors
-  class UnknownCommandProcessor < BaseProcessor
-    def process
-      @conversation.reply(Texts.unknown_command)
+  class UnknownCommandProcessor < SimpleReplyProcessor
+    def reply_with
+      Texts.unknown_command
     end
   end
 end

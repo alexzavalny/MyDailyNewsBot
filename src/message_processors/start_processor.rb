@@ -1,7 +1,7 @@
 module MessageProcessors
-  class StartProcessor < BaseProcessor
-    def process
-      @conversation.reply(Texts.welcome)
+  class StartProcessor < SimpleReplyProcessor
+    def reply_with
+      Texts.welcome
     end
   end
 end

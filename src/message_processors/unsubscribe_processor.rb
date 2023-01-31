@@ -3,8 +3,7 @@ module MessageProcessors
     def process
       return if check_no_subscriptions?
 
-      @conversation.reply(compose_subscription_list)
-      @conversation.reply_with_keyboard(compose_keyboard)
+      @conversation.reply_with_keyboard(compose_subscription_list, compose_keyboard)
       puts "replied with keyboard"
       subscription_number = read_subscription_number
       puts "read subscription number"
@@ -13,7 +12,7 @@ module MessageProcessors
       selected_subscription = subscriptions[subscription_number]
       selected_subscription.destroy
 
-      @conversation.reply("You are now unsubscribed from #{selected_subscription.website_name} news.")
+      @conversation.reply_with_closed_keyboard(Texts.you_are_unsubscribed(selected_subscription.website_name))
     end
 
     private
@@ -34,15 +33,16 @@ module MessageProcessors
     def read_subscription_number
       # Get the selected subscription
       @conversation.listen do |message|
-        p "message: #{message}"
-        if message.text == "zero"
+        message_text = message.is_a?(String) ? message : message.text
+
+        if message_text == "zero" || message_text == "Cancel"
           break -1
-        elsif !message.text.integer?
+        elsif message_text.to_i == 0
           @conversation.reply(Texts.you_entered_not_a_number)
-        elsif message.text.to_i - 1 >= subscriptions.length
+        elsif message_text.to_i - 1 >= subscriptions.length
           @conversation.reply(Texts.invalid_number)
         else
-          break message.text.to_i - 1
+          break message_text.to_i - 1
         end
       end
     end
@@ -61,11 +61,10 @@ module MessageProcessors
     end
 
     def compose_subscription_list
-      reply_message = "#{Texts.select_subscription}\n\n"
-      subscriptions.each_with_index do |subscription, index|
-        reply_message += "#{index + 1}. #{subscription.website_name}\n"
-      end
-      reply_message
+      "#{Texts.select_subscription}\n\n"
+      # subscriptions.each_with_index do |subscription, index|
+      #   reply_message += "#{index + 1}. #{subscription.website_name}\n"
+      # end
     end
   end
 end

@@ -10,7 +10,7 @@ module Texts
     end
 
     def enter_rss
-      "Please enter the RSS feed URL:"
+      "Please enter the RSS feed URL. Start with http:// or https://, ok? ❤️"
     end
 
     def subscription_limit_reached
@@ -18,7 +18,7 @@ module Texts
     end
 
     def select_subscription
-      "Please enter number of subscription to unsubscribe. (Enter zero to cancel)"
+      "Please select subscription to unsubscribe."
     end
 
     def your_subscription
@@ -71,6 +71,10 @@ module Texts
 
     def canceled
       "Canceled."
+    end
+
+    def you_are_unsubscribed(feed)
+      "You are now unsubscribed from #{feed} news."
     end
   end
 end

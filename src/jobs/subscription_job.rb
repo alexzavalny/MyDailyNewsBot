@@ -13,44 +13,48 @@ module Jobs
       puts "Job started..."
 
       loop do
-        @client.run(Config.token) do |bot|
-          Subscription.all.each do |sub|
-            chat_id = sub.chat_id
-            feed_url = sub.feed_url
-            last_update_at = sub.last_update_at
+        begin
+          @client.run(Config.token) do |bot|
+            Subscription.all.each do |sub|
+              chat_id = sub.chat_id
+              feed_url = sub.feed_url
+              last_update_at = sub.last_update_at
 
-            puts "Checking feed #{feed_url}"
-            feed = nil
-            begin
-              xml = HTTParty.get(feed_url).body
-              feed = Feedjira.parse(xml)
-            rescue
-              puts "Error parsing feed #{feed_url}"
-            end
+              puts "Checking feed #{feed_url}"
+              feed = nil
+              begin
+                xml = HTTParty.get(feed_url).body
+                feed = Feedjira.parse(xml)
+              rescue
+                puts "Error parsing feed #{feed_url}"
+              end
 
-            next if feed.nil?
+              next if feed.nil?
 
-            first = true
-            next unless feed
+              first = true
+              next unless feed
 
-            feed.entries.each do |entry|
-              next unless entry.published > last_update_at
+              feed.entries.each do |entry|
+                next unless entry.published > last_update_at
 
-              bot.api.send_message(chat_id: chat_id, text: format_message(sub, entry))
-              sub.update(last_update_at: entry.published) if first
-              first = false
+                bot.api.send_message(chat_id: chat_id, text: format_message(sub, entry), parse_mode: "Markdown")
+                sub.update(last_update_at: entry.published) if first
+                first = false
+              end
             end
           end
-        end
 
-        sleep Config.sleep_time
+          sleep Config.sleep_time
+        end
+      rescue
       end
     end
 
     private
 
     def format_message(subscription, entry)
-      "#{subscription.website_name}\n\n#{entry.title}\n\n#{entry.url}"
+      "*#{subscription.website_name}*\n#{entry.title}\n\n#{entry.url}"
+      # "#{entry.title}\n\n#{entry.url}"
     end
   end
 end
