@@ -1,5 +1,5 @@
 require "zeitwerk"
-require 'singleton'
+require "singleton"
 
 class Application
   include Singleton

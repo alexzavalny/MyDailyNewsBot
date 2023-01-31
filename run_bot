@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './application'
+require "./application"
 
 Application.instance.run_bot

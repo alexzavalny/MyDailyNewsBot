@@ -6,7 +6,7 @@ module MessageProcessors
     end
 
     def reply_with
-      @loader.reload if @loader
+      @loader&.reload
       Texts.available_commands
     end
   end
