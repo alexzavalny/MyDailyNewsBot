@@ -22,7 +22,7 @@ module Texts
     end
 
     def your_subscription
-      "Your subscriptions:"
+      "Your subscriptions is:"
     end
 
     def invalid_rss
