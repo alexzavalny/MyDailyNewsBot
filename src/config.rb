@@ -1,13 +1,20 @@
 module Config
+  CONFIG_FILE_NAME = "./config/app_config.yml"
+
   def self.token
-    "5733938985:AAEm62w2Jj1kBCXCwGM6LBgkOoxv7EFdNHU"
+    app_config["token"]
   end
 
   def self.subscription_limit
-    20
+    app_config["subscription_limit"].to_i
   end
 
   def self.sleep_time
-    60 * 10 # 10 minutes
+
+    app_config["job_sleep_cycle"].to_i
+  end
+
+  def self.app_config
+    YAML.load_file(CONFIG_FILE_NAME)
   end
 end
