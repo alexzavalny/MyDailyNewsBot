@@ -22,7 +22,7 @@ A Ruby-based project that consists of two apps - a Telegram bot that communicate
 
 Create a bot using BotFather in Telegram
 Rename app_config.yml.example to app_config.yml
-Replace `YOUR_TELEGRAM_BOT_API_KEY` in config/app_config.yml with your bot API key
+Replace `token` in config/app_config.yml with your bot API key
 
 ### Start the bot
 
