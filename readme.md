@@ -18,6 +18,15 @@ A Ruby-based project that consists of two apps - a Telegram bot that communicate
 
     bundle install
 
+#### Gems used:
+
+ 1. `zeitwerk` for automatic loading
+ 2. `active-record` for DB ORM
+ 3. `standalone_migrations` for using migrations without Rails
+ 4. `feedjira` for reading RSS Feeds
+ 5. `standard` for automatic linting code
+ 6. `telegram-bot-ruby` for Telegram operations
+
 ### Set up your Telegram bot API key
 
 Create a bot using BotFather in Telegram
