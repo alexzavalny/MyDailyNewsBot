@@ -6,6 +6,15 @@ class Application
 
   attr_reader :loader
 
+  DIRECTORIES_TO_LOAD = [
+    "#{__dir__}/models",
+    "#{__dir__}/src",
+  ].freeze
+
+  DIRECTORIES_TO_EAGER_LOAD = [
+    "#{__dir__}/src/extensions",
+  ].freeze
+
   def initialize
     initialize_loader
   end
@@ -13,14 +22,23 @@ class Application
   def initialize_loader
     @loader = Zeitwerk::Loader.new
 
-    @loader.push_dir("#{__dir__}/models")
-    @loader.push_dir("#{__dir__}/src")
+    DIRECTORIES_TO_LOAD.each do |dir|
+      @loader.push_dir(dir)
+    end
+
     @loader.enable_reloading
     @loader.setup
-    @loader.eager_load_dir("#{__dir__}/src/extensions")
+
+    DIRECTORIES_TO_EAGER_LOAD.each do |dir|
+      @loader.eager_load_dir(dir)
+    end
   end
 
   def run_bot
     Bots::RssBot.new.start
+  end
+
+  def run_job
+    Jobs::SubscriptionJob.new.start
   end
 end

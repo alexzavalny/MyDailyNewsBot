@@ -5,8 +5,9 @@ require "httparty"
 
 module Jobs
   class SubscriptionJob
-    def initialize(client: Telegram::Bot::Client)
+    def initialize(client: Telegram::Bot::Client, token: Config.token)
       @client = client
+      @token = token
     end
 
     def start
@@ -14,7 +15,7 @@ module Jobs
 
       loop do
         begin
-          @client.run(Config.token) do |bot|
+          @client.run(@token) do |bot|
             Subscription.all.each do |sub|
               chat_id = sub.chat_id
               feed_url = sub.feed_url
